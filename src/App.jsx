@@ -10,7 +10,7 @@ function App() {
 			<div className="Title">
 				<h1>Prototype 1</h1>
 			</div>
-			<Canvas id="canvas">
+			<Canvas id="canvas" shadows>
 				<Suspense fallback={<Loader />}>
 					<Three />
 				</Suspense>
