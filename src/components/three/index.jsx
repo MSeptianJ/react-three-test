@@ -9,9 +9,7 @@ export default function Three() {
 		if (!!orbitControlRef.current) {
 			const { x, y } = state.mouse;
 			orbitControlRef.current.setAzimuthalAngle(-x * angleToRadians(45));
-			orbitControlRef.current.setPolarAngle(
-				(y + 0.5) * angleToRadians(90 - 30)
-			);
+			orbitControlRef.current.setPolarAngle((y + 1) * angleToRadians(90 - 30));
 			orbitControlRef.current.update();
 		}
 	});
@@ -20,9 +18,8 @@ export default function Three() {
 		<>
 			<PerspectiveCamera makeDefault position={[0, 1, 15]} />
 			<OrbitControls
-				autoRotate="true"
 				ref={orbitControlRef}
-				minPolarAngle={angleToRadians(50)}
+				minPolarAngle={angleToRadians(60)}
 				maxPolarAngle={angleToRadians(80)}
 			/>
 			{/* Ball */}
@@ -37,6 +34,7 @@ export default function Three() {
 			</mesh>
 			{/* Light */}
 			<ambientLight args={['#ffffff', 1]} />
+			{/* <pointLight args={['#ffffff', 3]} /> */}
 		</>
 	);
 }
@@ -44,7 +42,5 @@ export default function Three() {
 // function Ship(props) {
 // 	const { scene } = useGLTF('/Duck.gltf');
 
-// 	return (
-// 			<primitive object={scene} />
-// 	);
+// 	return <primitive object={scene} />;
 // }
