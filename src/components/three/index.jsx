@@ -2,12 +2,11 @@ import {
 	Environment,
 	OrbitControls,
 	PerspectiveCamera,
-	useGLTF,
 } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
-import angleToRadians from '../../utils/angle';
 import * as THREE from 'three';
+import angleToRadians from '../../utils/angle';
+import { Duck } from '../objects/Duck';
 
 export default function Three() {
 	const orbitControlRef = useRef(null);
@@ -22,7 +21,7 @@ export default function Three() {
 
 	return (
 		<>
-			<PerspectiveCamera makeDefault position={[0, 1, 15]} />
+			{/* <PerspectiveCamera makeDefault position={[0, 1, 15]} /> */}
 			<OrbitControls
 				// autoRotate={true}
 				ref={orbitControlRef}
@@ -31,10 +30,13 @@ export default function Three() {
 			/>
 
 			{/* Ball */}
-			<mesh castShadow receiveShadow position={[0, 2, 0]}>
+			{/* <mesh castShadow receiveShadow position={[0, 2, 0]}>
 				<sphereGeometry args={[1, 32, 32]} />
 				<meshStandardMaterial color="#4287f5" />
-			</mesh>
+			</mesh> */}
+
+			{/* Object */}
+			<Duck position={[0, 2, 0]} />
 
 			{/* Floor */}
 			<mesh castShadow receiveShadow rotation={[-angleToRadians(90), 0, 0]}>
@@ -57,7 +59,6 @@ export default function Three() {
 			/>
 
 			{/* Environment */}
-			{/* <Environment background preset="sunset" blur={0.8} /> */}
 			<Environment background>
 				<mesh>
 					<sphereGeometry args={[50, 100, 100]} />
@@ -67,9 +68,3 @@ export default function Three() {
 		</>
 	);
 }
-
-// function Ship(props) {
-// 	const { scene } = useGLTF('/Duck.gltf');
-
-// 	return <primitive object={scene} />;
-// }

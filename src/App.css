@@ -1,8 +1,8 @@
-/* * {
+* {
 	box-sizing: border-box;
 }
 
-html,
+/* html,
 body,
 #root {
 	width: 100%;
@@ -10,6 +10,11 @@ body,
 	margin: 0;
 	padding: 0;
 } */
+#canvas {
+	width: 40% !important;
+	height: 40% !important;
+	margin: 0 auto;
+}
 
 /* #canvas {
 	display: flex;
