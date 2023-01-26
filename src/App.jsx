@@ -1,5 +1,10 @@
+import {
+	Environment,
+	OrbitControls,
+	PerspectiveCamera,
+} from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { ARButton, Controllers, XR } from '@react-three/xr';
+import { ARButton, XR } from '@react-three/xr';
 import { Suspense } from 'react';
 import './App.css';
 import { Duck } from './components/objects/Duck';
@@ -15,11 +20,16 @@ function App() {
 			<ARButton />
 			<Canvas id="canvas" shadows>
 				<Suspense fallback={null} r3f>
-					<XR isPresenting>
+					<XR referenceSpace="local">
 						<Duck
-							position={[0, 0.3, -1]}
+							position={[0, 0.3, -5]}
 							rotation={[0, angleToRadians(-90), 0]}
-						/>
+						>
+							<OrbitControls />
+							<ambientLight args={['#ffffff', 0.3]} />
+							<PerspectiveCamera makeDefault position={[0, 1, 20]} />
+							<Environment preset="sunset" />
+						</Duck>
 					</XR>
 				</Suspense>
 			</Canvas>
