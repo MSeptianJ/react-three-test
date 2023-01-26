@@ -6,11 +6,16 @@ import Loader from './components/progress';
 
 function App() {
 	return (
-		<Canvas id="canvas">
-			<Suspense fallback={<Loader />}>
-				<Three />
-			</Suspense>
-		</Canvas>
+		<>
+			<div className="Title">
+				<h1>Prototype 1</h1>
+			</div>
+			<Canvas id="canvas" shadows>
+				<Suspense fallback={<Loader />}>
+					<Three />
+				</Suspense>
+			</Canvas>
+		</>
 	);
 }
 
