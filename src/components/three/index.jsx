@@ -8,6 +8,8 @@ import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import angleToRadians from '../../utils/angle';
 import * as THREE from 'three';
+import { Duck } from '../objects/duck';
+import { Cactus } from '../objects/cactus';
 
 export default function Three() {
 	const orbitControlRef = useRef(null);
@@ -31,10 +33,13 @@ export default function Three() {
 			/>
 
 			{/* Ball */}
-			<mesh castShadow receiveShadow position={[0, 2, 0]}>
+			{/* <mesh castShadow receiveShadow position={[0, 2, 0]}>
 				<sphereGeometry args={[1, 32, 32]} />
 				<meshStandardMaterial color="#4287f5" />
-			</mesh>
+			</mesh> */}
+			{/* <Model position={[0, 1, 0]} rotation={[0, 0, 0]} /> */}
+			<Duck position={[2, 1, 0]} />
+			<Cactus position={[-2, 1, 0]} />
 
 			{/* Floor */}
 			<mesh castShadow receiveShadow rotation={[-angleToRadians(90), 0, 0]}>
@@ -57,19 +62,14 @@ export default function Three() {
 			/>
 
 			{/* Environment */}
-			{/* <Environment background preset="sunset" blur={0.8} /> */}
+			{/* <Environment preset="lobby" blur={0.8} /> */}
+
 			<Environment background>
 				<mesh>
 					<sphereGeometry args={[50, 100, 100]} />
-					<meshBasicMaterial color="#82c93f" side={THREE.BackSide} />
+					<meshBasicMaterial color="#b7f77c" side={THREE.BackSide} />
 				</mesh>
 			</Environment>
 		</>
 	);
 }
-
-// function Ship(props) {
-// 	const { scene } = useGLTF('/Duck.gltf');
-
-// 	return <primitive object={scene} />;
-// }
