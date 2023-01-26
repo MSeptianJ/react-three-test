@@ -17,10 +17,14 @@ function App() {
 			{/* <div className="Title">
 				<h1>Prototype 1</h1>
 			</div> */}
-			<ARButton />
+			<ARButton
+				sessionInit={{
+					optionalFeatures: ['local-floor', 'bounded-floor'],
+				}}
+			/>
 			<Canvas id="canvas" shadows>
 				<Suspense fallback={null} r3f>
-					<XR referenceSpace="local">
+					<XR referenceSpace="local-floor">
 						<Duck
 							position={[0, 0.3, -5]}
 							rotation={[0, angleToRadians(-90), 0]}
