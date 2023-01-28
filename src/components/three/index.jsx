@@ -23,11 +23,32 @@ export default function Three() {
 	// 	}
 	// });
 
+	// useEffect(() => {
+	// 	if (!!ballRef.current) {
+	// 		const tl = gsap.timeline({ repeat: -1 });
+	// 		// console.log(ballRef.current);
+	// 		const pos = ballRef.current.position;
+
+	// 		tl.to(pos, {
+	// 			x: -3,
+	// 			duration: 1,
+	// 		});
+	// 		tl.to(
+	// 			pos,
+	// 			{
+	// 				y: 1,
+	// 				duration: 1,
+	// 				ease: 'bounce.out',
+	// 			},
+	// 			'<'
+	// 		);
+	// 	}
+	// }, [ballRef.current]);
+
 	useEffect(() => {
-		if (!!ballRef.current) {
+		if (!!duckRef.current) {
 			const tl = gsap.timeline({ repeat: -1 });
-			// console.log(ballRef.current);
-			const pos = ballRef.current.position;
+			const pos = duckRef.current.position;
 
 			tl.to(pos, {
 				x: -3,
@@ -36,24 +57,14 @@ export default function Three() {
 			tl.to(
 				pos,
 				{
-					y: 1,
+					y: 0,
 					duration: 1,
 					ease: 'bounce.out',
 				},
 				'<'
 			);
 		}
-	}, [ballRef.current]);
-
-	// useEffect(() => {
-	// 	if (!!duckRef.current) {
-	// 		const pos = duckRef.current.position;
-	// 		gsap.to(pos, {
-	// 			x: 3,
-	// 			duration: 5,
-	// 		});
-	// 	}
-	// }, [duckRef.current]);
+	}, [duckRef.current]);
 
 	return (
 		<>
@@ -66,11 +77,11 @@ export default function Three() {
 			/>
 
 			{/* Ball */}
-			<mesh ref={ballRef} castShadow receiveShadow position={[3, 5, 0]}>
+			{/* <mesh ref={ballRef} castShadow receiveShadow position={[3, 5, 0]}>
 				<sphereGeometry args={[1, 32, 32]} />
 				<meshStandardMaterial color="#4287f5" metalness={0.8} roughness={0.4} />
-			</mesh>
-			{/* <Duck position={[2, 0, 0]} ref={duckRef} /> */}
+			</mesh> */}
+			<Duck position={[3, 5, 0]} ref={duckRef} />
 			{/* <Cactus position={[-2, 1, 0]} /> */}
 
 			{/* Floor */}

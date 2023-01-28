@@ -1,9 +1,10 @@
 import { useGLTF } from '@react-three/drei';
+import { forwardRef } from 'react';
 
-export function Duck(props) {
+export const Duck = forwardRef((props, ref) => {
 	const { nodes, materials } = useGLTF('/Duck.gltf');
 	return (
-		<group {...props} dispose={null}>
+		<group {...props} dispose={null} ref={ref}>
 			<group scale={0.01}>
 				<mesh
 					castShadow
@@ -14,6 +15,6 @@ export function Duck(props) {
 			</group>
 		</group>
 	);
-}
+});
 
 useGLTF.preload('/Duck.gltf');
