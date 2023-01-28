@@ -3,25 +3,43 @@ import {
 	OrbitControls,
 	PerspectiveCamera,
 } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { Spherical } from 'three';
 import angleToRadians from '../../utils/angle';
 import { Duck } from '../objects/duck';
+
+const orbitElectron = (mesh, theta, phi, radius) => {
+	const spherical = new Spherical();
+	spherical.setFromVector3(mesh.position);
+
+	spherical.theta = theta || spherical.theta;
+	spherical.phi = phi || spherical.phi;
+	spherical.radius = radius || spherical.radius;
+
+	mesh.position.setFromSpherical(spherical);
+};
 
 export default function Three() {
 	const orbitControlRef = useRef(null);
 	const duckRef = useRef(null);
 	const ballRef = useRef(null);
 
-	// useFrame((state) => {
-	// 	if (!!orbitControlRef.current) {
-	// 		const { x, y } = state.mouse;
-	// 		orbitControlRef.current.setAzimuthalAngle(-x * angleToRadians(45));
-	// 		orbitControlRef.current.setPolarAngle((y + 1) * angleToRadians(90 - 30));
-	// 		orbitControlRef.current.update();
-	// 	}
-	// });
+	useFrame((engine) => {
+		// if (!!orbitControlRef.current) {
+		// 	const { x, y } = state.mouse;
+		// 	orbitControlRef.current.setAzimuthalAngle(-x * angleToRadians(45));
+		// 	orbitControlRef.current.setPolarAngle((y + 1) * angleToRadians(90 - 30));
+		// 	orbitControlRef.current.update();
+		// }
+
+		orbitElectron(
+			duckRef.current,
+			engine.clock.elapsedTime * 2 * Math.PI * 0.5
+		);
+	});
 
 	// useEffect(() => {
 	// 	if (!!ballRef.current) {
@@ -45,26 +63,26 @@ export default function Three() {
 	// 	}
 	// }, [ballRef.current]);
 
-	useEffect(() => {
-		if (!!duckRef.current) {
-			const tl = gsap.timeline({ repeat: -1 });
-			const pos = duckRef.current.position;
+	// useEffect(() => {
+	// 	if (!!duckRef.current) {
+	// 		const tl = gsap.timeline({ repeat: -1 });
+	// 		const pos = duckRef.current.position;
 
-			tl.to(pos, {
-				x: -3,
-				duration: 1,
-			});
-			tl.to(
-				pos,
-				{
-					y: 0,
-					duration: 1,
-					ease: 'bounce.out',
-				},
-				'<'
-			);
-		}
-	}, [duckRef.current]);
+	// 		tl.to(pos, {
+	// 			x: -3,
+	// 			duration: 1,
+	// 		});
+	// 		tl.to(
+	// 			pos,
+	// 			{
+	// 				y: 0,
+	// 				duration: 1,
+	// 				ease: 'bounce.out',
+	// 			},
+	// 			'<'
+	// 		);
+	// 	}
+	// }, [duckRef.current]);
 
 	return (
 		<>
@@ -81,7 +99,7 @@ export default function Three() {
 				<sphereGeometry args={[1, 32, 32]} />
 				<meshStandardMaterial color="#4287f5" metalness={0.8} roughness={0.4} />
 			</mesh> */}
-			<Duck position={[3, 5, 0]} ref={duckRef} />
+			<Duck position={[3, 0, 0]} ref={duckRef} />
 			{/* <Cactus position={[-2, 1, 0]} /> */}
 
 			{/* Floor */}
