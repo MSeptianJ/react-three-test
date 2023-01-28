@@ -47,22 +47,96 @@ export default function Three() {
 
 	useEffect(() => {
 		if (!!duckRef.current) {
+			console.log(duckRef.current);
 			const tl = gsap.timeline({ repeat: -1 });
 			const pos = duckRef.current.position;
 
 			tl.to(pos, {
-				x: -3,
+				x: 3,
 				duration: 1,
+				ease: 'sine.out',
 			});
 			tl.to(
 				pos,
 				{
-					y: 0,
+					z: 0,
 					duration: 1,
-					ease: 'bounce.out',
+					ease: 'sine.out',
 				},
 				'<'
 			);
+			tl.to(pos, {
+				x: 0,
+				duration: 1,
+				ease: 'sine.out',
+			});
+			tl.to(
+				pos,
+				{
+					z: 3,
+					duration: 1,
+					ease: 'sine.out',
+				},
+				'<'
+			);
+			tl.to(pos, {
+				x: -3,
+				duration: 1,
+				ease: 'sine.out',
+			});
+			tl.to(
+				pos,
+				{
+					z: 0,
+					duration: 1,
+					ease: 'sine.out',
+				},
+				'<'
+			);
+			tl.to(pos, {
+				x: 0,
+				duration: 1,
+				ease: 'sine.out',
+			});
+			tl.to(
+				pos,
+				{
+					z: -3,
+					duration: 1,
+					ease: 'sine.out',
+				},
+				'<'
+			);
+
+			// tl.to(pos, {
+			// 	x: -3,
+			// 	duration: 1,
+			// 	ease: 'sine.out',
+			// });
+			// tl.to(pos, {
+			// 	z: -3,
+			// 	duration: 1,
+			// 	ease: 'sine.out',
+			// });
+			// tl.to(pos, {
+			// 	x: 0,
+			// 	duration: 1,
+			// 	ease: 'sine.out',
+			// });
+
+			// tl.to(pos, {
+			// 	x: -3,
+			// 	duration: 1,
+			// });
+			// tl.to(
+			// 	pos,
+			// 	{
+			// 		y: 0,
+			// 		duration: 1,
+			// 		ease: 'bounce.out',
+			// 	},
+			// 	'<'
+			// );
 		}
 	}, [duckRef.current]);
 
@@ -72,8 +146,8 @@ export default function Three() {
 			<OrbitControls
 				// autoRotate={true}
 				ref={orbitControlRef}
-				minPolarAngle={angleToRadians(60)}
-				maxPolarAngle={angleToRadians(80)}
+				// minPolarAngle={angleToRadians(60)}
+				// maxPolarAngle={angleToRadians(80)}
 			/>
 
 			{/* Ball */}
@@ -81,7 +155,7 @@ export default function Three() {
 				<sphereGeometry args={[1, 32, 32]} />
 				<meshStandardMaterial color="#4287f5" metalness={0.8} roughness={0.4} />
 			</mesh> */}
-			<Duck position={[3, 5, 0]} ref={duckRef} />
+			<Duck position={[0, 1, -3]} ref={duckRef} />
 			{/* <Cactus position={[-2, 1, 0]} /> */}
 
 			{/* Floor */}
