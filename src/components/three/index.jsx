@@ -54,56 +54,59 @@ export default function Three() {
 			tl.to(pos, {
 				x: 3,
 				duration: 1,
-				ease: 'sine.out',
+				ease: 'circ.in',
 			});
 			tl.to(
 				pos,
 				{
 					z: 0,
 					duration: 1,
-					ease: 'sine.out',
+					ease: 'circ.in',
 				},
 				'<'
 			);
+
 			tl.to(pos, {
 				x: 0,
 				duration: 1,
-				ease: 'sine.out',
+				ease: 'circ.out',
 			});
 			tl.to(
 				pos,
 				{
 					z: 3,
 					duration: 1,
-					ease: 'sine.out',
+					ease: 'circ.out',
 				},
 				'<'
 			);
+
 			tl.to(pos, {
 				x: -3,
 				duration: 1,
-				ease: 'sine.out',
+				ease: 'circ.in',
 			});
 			tl.to(
 				pos,
 				{
 					z: 0,
 					duration: 1,
-					ease: 'sine.out',
+					ease: 'circ.in',
 				},
 				'<'
 			);
+
 			tl.to(pos, {
 				x: 0,
 				duration: 1,
-				ease: 'sine.out',
+				ease: 'circ.out',
 			});
 			tl.to(
 				pos,
 				{
 					z: -3,
 					duration: 1,
-					ease: 'sine.out',
+					ease: 'circ.out',
 				},
 				'<'
 			);
