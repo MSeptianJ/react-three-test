@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
 import Three from './components/three';
 import Loader from './components/progress';
+import { Environment } from '@react-three/drei';
 
 function App() {
 	return (
@@ -11,7 +12,7 @@ function App() {
 				<h1>Prototype 1</h1>
 			</div>
 			<Canvas id="canvas" shadows>
-				<Suspense fallback={<Loader />}>
+				<Suspense fallback={null} r3f>
 					<Three />
 				</Suspense>
 			</Canvas>

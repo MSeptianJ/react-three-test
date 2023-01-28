@@ -2,15 +2,18 @@ import {
 	Environment,
 	OrbitControls,
 	PerspectiveCamera,
-	useGLTF,
 } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
-import { useRef } from 'react';
-import angleToRadians from '../../utils/angle';
+import gsap from 'gsap';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import angleToRadians from '../../utils/angle';
+import { Duck } from '../objects/duck';
 
 export default function Three() {
 	const orbitControlRef = useRef(null);
+	const duckRef = useRef(null);
+	const ballRef = useRef(null);
+
 	// useFrame((state) => {
 	// 	if (!!orbitControlRef.current) {
 	// 		const { x, y } = state.mouse;
@@ -19,6 +22,49 @@ export default function Three() {
 	// 		orbitControlRef.current.update();
 	// 	}
 	// });
+
+	// useEffect(() => {
+	// 	if (!!ballRef.current) {
+	// 		const tl = gsap.timeline({ repeat: -1 });
+	// 		// console.log(ballRef.current);
+	// 		const pos = ballRef.current.position;
+
+	// 		tl.to(pos, {
+	// 			x: -3,
+	// 			duration: 1,
+	// 		});
+	// 		tl.to(
+	// 			pos,
+	// 			{
+	// 				y: 1,
+	// 				duration: 1,
+	// 				ease: 'bounce.out',
+	// 			},
+	// 			'<'
+	// 		);
+	// 	}
+	// }, [ballRef.current]);
+
+	useEffect(() => {
+		if (!!duckRef.current) {
+			const tl = gsap.timeline({ repeat: -1 });
+			const pos = duckRef.current.position;
+
+			tl.to(pos, {
+				x: -3,
+				duration: 1,
+			});
+			tl.to(
+				pos,
+				{
+					y: 0,
+					duration: 1,
+					ease: 'bounce.out',
+				},
+				'<'
+			);
+		}
+	}, [duckRef.current]);
 
 	return (
 		<>
@@ -31,22 +77,24 @@ export default function Three() {
 			/>
 
 			{/* Ball */}
-			<mesh castShadow receiveShadow position={[0, 2, 0]}>
+			{/* <mesh ref={ballRef} castShadow receiveShadow position={[3, 5, 0]}>
 				<sphereGeometry args={[1, 32, 32]} />
-				<meshStandardMaterial color="#4287f5" />
-			</mesh>
+				<meshStandardMaterial color="#4287f5" metalness={0.8} roughness={0.4} />
+			</mesh> */}
+			<Duck position={[3, 5, 0]} ref={duckRef} />
+			{/* <Cactus position={[-2, 1, 0]} /> */}
 
 			{/* Floor */}
 			<mesh castShadow receiveShadow rotation={[-angleToRadians(90), 0, 0]}>
 				<planeGeometry args={[16, 16]} />
-				<meshStandardMaterial color="#95dd50" />
+				<meshStandardMaterial color="#b7f77c" />
 			</mesh>
 
 			{/* Wall */}
-			<mesh castShadow receiveShadow position={[0, 4, -8]}>
+			{/* <mesh castShadow receiveShadow position={[0, 4, -8]}>
 				<planeGeometry args={[16, 8]} />
-				<meshStandardMaterial color="#95dd50" />
-			</mesh>
+				<meshStandardMaterial color="#b7f77c" />
+			</mesh> */}
 
 			{/* Light */}
 			<ambientLight args={['#ffffff', 0.2]} />
@@ -57,19 +105,14 @@ export default function Three() {
 			/>
 
 			{/* Environment */}
-			{/* <Environment background preset="sunset" blur={0.8} /> */}
+			{/* <Environment preset="lobby" blur={0.8} /> */}
+
 			<Environment background>
 				<mesh>
 					<sphereGeometry args={[50, 100, 100]} />
-					<meshBasicMaterial color="#82c93f" side={THREE.BackSide} />
+					<meshBasicMaterial color="#b7f77c" side={THREE.BackSide} />
 				</mesh>
 			</Environment>
 		</>
 	);
 }
-
-// function Ship(props) {
-// 	const { scene } = useGLTF('/Duck.gltf');
-
-// 	return <primitive object={scene} />;
-// }
