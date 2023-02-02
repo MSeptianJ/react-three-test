@@ -3,7 +3,6 @@ import {
 	OrbitControls,
 	PerspectiveCamera,
 } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
 import gsap from 'gsap';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
@@ -46,28 +45,23 @@ export default function Three() {
 			/>
 
 			{/* Ball */}
-			{/* <mesh ref={ballRef} castShadow receiveShadow position={[3, 5, 0]}>
-				<sphereGeometry args={[1, 32, 32]} />
-				<meshStandardMaterial color="#4287f5" metalness={0.8} roughness={0.4} />
-			</mesh> */}
 			<Duck
 				position={[3, 5, 0]}
 				rotation={[0, angleToRadians(180), 0]}
 				ref={duckRef}
 			/>
-			{/* <Cactus position={[-2, 1, 0]} /> */}
 
 			{/* Floor */}
 			<mesh castShadow receiveShadow rotation={[-angleToRadians(90), 0, 0]}>
-				<planeGeometry args={[16, 16]} />
+				<planeGeometry args={[20, 16]} />
 				<meshStandardMaterial color="#b7f77c" />
 			</mesh>
 
 			{/* Wall */}
-			{/* <mesh castShadow receiveShadow position={[0, 4, -8]}>
-				<planeGeometry args={[16, 8]} />
+			<mesh castShadow receiveShadow position={[0, 4, -8]}>
+				<planeGeometry args={[20, 8]} />
 				<meshStandardMaterial color="#b7f77c" />
-			</mesh> */}
+			</mesh>
 
 			{/* Light */}
 			<ambientLight args={['#ffffff', 0.2]} />
@@ -78,8 +72,6 @@ export default function Three() {
 			/>
 
 			{/* Environment */}
-			{/* <Environment preset="lobby" blur={0.8} /> */}
-
 			<Environment background>
 				<mesh>
 					<sphereGeometry args={[50, 100, 100]} />
