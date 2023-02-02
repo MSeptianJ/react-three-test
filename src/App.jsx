@@ -1,9 +1,7 @@
 import './App.css';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import Three from './components/three';
-import Loader from './components/progress';
-import { Environment } from '@react-three/drei';
+import Object from './components/bouncingDuck';
 
 function App() {
 	return (
@@ -13,7 +11,7 @@ function App() {
 			</div>
 			<Canvas id="canvas" shadows>
 				<Suspense fallback={null} r3f>
-					<Three />
+					<Object />
 				</Suspense>
 			</Canvas>
 		</>
